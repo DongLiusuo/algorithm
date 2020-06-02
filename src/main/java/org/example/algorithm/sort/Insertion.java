@@ -12,8 +12,8 @@ public class Insertion {
     插入排序的性能
         在最坏的情况下，{6,5,4,3,2,1}
         比较次数为(n-1)+(n-2)+(n-3)+...+2+1=n^2/2-n/2
-        交换次数为(n-1)
-        总交换次数为n^2/2-n/2+n-1=n^2/2+n/2-1
+        交换次数为(n-1)+(n-2)+(n-3)+...+2+1=n^2/2-n/2
+        总交换次数为n^2-n
         时间复杂度O(n^2)
      */
 
@@ -23,7 +23,16 @@ public class Insertion {
      * @param a
      */
     public static void sort(Comparable[] a) {
-
+        for (int i = 1; i < a.length; i++) {
+            for (int j = i; j > 0; j--) {
+                //比较索引j处的值和索引j-1处的值，如果索引j-1处的值比索引j处的值大，则交换数据，如果不大，已经找到合适的位置，退
+                if (greater(a[j - 1], a[j])) {
+                    exch(a, j - 1, j);
+                } else {
+                    break;
+                }
+            }
+        }
     }
 
     /**
